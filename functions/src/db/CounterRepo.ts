@@ -1,5 +1,4 @@
 import * as firebase from 'firebase-admin';
-import { Counter, Cue } from '../types';
 import db from './DbGateway';
 
 const FieldValue = firebase.firestore.FieldValue;
