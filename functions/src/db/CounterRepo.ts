@@ -4,7 +4,7 @@ import db from './DbGateway';
 const FieldValue = firebase.firestore.FieldValue;
 
 export default class CounterRepo {
-  static readonly DOC_ID = "counter-id";
+  static readonly DOC_ID = 'counter-id';
   private counterRef = db.counter.doc(CounterRepo.DOC_ID);
 
   async getCounter() {
