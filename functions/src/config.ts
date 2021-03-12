@@ -1,1 +1,3 @@
-export const TOKEN_SECRET = 'not really secret at all';
+import * as functions from 'firebase-functions';
+
+export const TOKEN_SECRET = functions.config().token.secret;

@@ -10,7 +10,7 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
     next();
   } catch (e) {
     if (e.name !== 'TokenExpiredError') {
-      functions.logger.error('Error while verifying jwt', { token, e });
+      functions.logger.warn('Error while verifying jwt', { token, e });
     }
     res.status(401).json({ error: e.message });
   }
