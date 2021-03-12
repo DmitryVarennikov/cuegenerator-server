@@ -13,10 +13,12 @@ open https://us-central1-cuegenerator.cloudfunctions.net/api
 ```
 
 # How to develop
+
 ## API protocol
 
 ### Obtain token
-Make a request to obtain a JSON web token
+
+Make a request to obtain a JSON web token to use in all subsequent requests. **Note** the expiration time is set to one hour.
 
 **Request**
 
@@ -30,22 +32,37 @@ GET /
 {"token": "..."}
 ```
 
-### Send data
-Submit cue and bump the counter
+### Get counter value
 
 **Request**
 
 ```
-POST /
-
-Content-Type: application/json
+GET /counter
 Authorization: Bearer <token>
-
-{"cue": "<string>"}
 ```
 
 **Response**
 
 ```
 {"counter": "<number>"}
+```
+
+### Send data
+
+Submit cue and bump up the counter
+**Request**
+
+```
+POST /counter
+
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{"counter": "<number>", "cue": "<string>"}
+```
+
+**Response**
+
+```
+{"cue": "<string>"}
 ```

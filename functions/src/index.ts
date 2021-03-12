@@ -9,7 +9,7 @@ import clientAuthMiddleware from './middleware/clientAuthMiddleware';
 
 const app = express();
 app.use(express.json());
-app.post('/', clientAuthMiddleware);
+app.use('/counter', clientAuthMiddleware);
 app.use('/', router);
 app.use(errorMiddleware);
 
