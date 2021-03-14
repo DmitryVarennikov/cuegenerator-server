@@ -15,21 +15,14 @@ router.get('/counter', async (req: Request, res: Response) => {
   res.json({ counter: counter?.value });
 });
 router.post('/counter', async (req: Request, res: Response) => {
-  // const fileName = req.body.fileName || 'Untitled.cue';
-  const cue = req.body.cue;
-  if (cue) {
-    // res.setHeader('Content-Type', 'application/octet-stream');
-    // res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
-    // res.setHeader('Content-Length', Buffer.byteLength(cue, 'utf-8'));
-    // res.write(cue, 'binary');
-    // res.end();
-
+  const { performer, title, fileName, cue } = req.body;
+  if (performer && title && fileName && cue) {
     const counter = await counterRepo.incrementCounter();
-    await savedCuesRepo.addCue(cue);
+    await savedCuesRepo.addCue(performer, title, fileName, cue);
 
-    res.json({ counter: counter?.value, cue });
+    res.json({ counter: counter?.value });
 
-    functions.logger.info('api.post', { counter: counter?.value, cue });
+    functions.logger.info('api.post', { counter: counter?.value, performer, title, cue });
   } else {
     res.status(404).end();
   }

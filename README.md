@@ -50,6 +50,7 @@ Authorization: Bearer <token>
 ### Send data
 
 Submit cue and bump up the counter
+
 **Request**
 
 ```
@@ -58,11 +59,11 @@ POST /counter
 Content-Type: application/json
 Authorization: Bearer <token>
 
-{"counter": "<number>", "cue": "<string>"}
+{"cue": "<string>"}
 ```
 
 **Response**
 
 ```
-{"cue": "<string>"}
+{"counter": "<number>"}
 ```
