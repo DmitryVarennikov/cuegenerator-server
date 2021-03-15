@@ -1,5 +1,5 @@
-import { allowedOrigins } from '../config';
 import cors from 'cors';
+import { allowedOrigins } from '../config';
 
 const corsOptions = {
   preflightContinue: true,
