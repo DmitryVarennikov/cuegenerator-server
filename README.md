@@ -59,7 +59,12 @@ POST /counter
 Content-Type: application/json
 Authorization: Bearer <token>
 
-{"cue": "<string>"}
+{
+	"performer": "<string>", 
+	"title": "<string>", 
+	"fileName": "<string>",
+	"cue": "<string>"
+}
 ```
 
 **Response**

@@ -16,16 +16,17 @@ router.get('/counter', async (req: Request, res: Response) => {
 });
 router.post('/counter', async (req: Request, res: Response) => {
   const { performer, title, fileName, cue } = req.body;
+  let counter;
+
   if (performer && title && fileName && cue) {
-    const counter = await counterRepo.incrementCounter();
+    counter = await counterRepo.incrementCounter();
     await savedCuesRepo.addCue(performer, title, fileName, cue);
-
-    res.json({ counter: counter?.value });
-
-    functions.logger.info('api.post', { counter: counter?.value, performer, title, cue });
   } else {
-    res.status(404).end();
+    counter = await counterRepo.getCounter();
   }
+
+  res.json({ counter: counter?.value });
+  functions.logger.info('api.post', { counter: counter?.value, performer, title, fileName, cue });
 });
 
 export default router;
