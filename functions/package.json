@@ -31,8 +31,14 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
     "firebase-functions-test": "^0.2.0",
+    "husky": "^4.3.8",
     "prettier": "^2.2.1",
     "typescript": "^3.8.0"
   },
-  "private": true
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build"
+    }
+  }
 }
