@@ -1,14 +1,14 @@
 # How to run locally
 
 ```bash
-npm --prefix functions run serve
+npm run serve
 open http://localhost:5001/cuegenerator/us-central1/api
 ```
 
 # How to build and deploy
 
 ```bash
-npm --prefix functions run deploy
+npm run deploy
 open https://us-central1-cuegenerator.cloudfunctions.net/api
 ```
 
