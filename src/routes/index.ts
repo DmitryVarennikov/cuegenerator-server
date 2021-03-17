@@ -3,6 +3,7 @@ import express, { Router, Express, Request, Response, NextFunction } from 'expre
 import { counterRepo, savedCuesRepo } from '../db';
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config';
+import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 
 const router = express.Router();
 
@@ -13,6 +14,21 @@ router.get('/', (req: Request, res: Response) => {
 router.get('/counter', async (req: Request, res: Response) => {
   const counter = await counterRepo.getCounter();
   res.json({ counter: counter?.value });
+});
+router.get('/counter/subscribe', async (req: Request, res: Response) => {
+  res.writeHead(200, { 'Content-Type': 'text/event-stream', Connection: 'keep-alive', 'Cache-Control': 'no-cache' });
+  const onSnapshot = (snapshot: DocumentSnapshot) => {
+    const counter = snapshot.data();
+    const out = { counter: counter?.value };
+    res.write(JSON.stringify(out));
+  };
+  const onError = (error: Error) => {
+    // After an error, the listener will not receive any more events, and there is no need to detach your listener.
+    // https://firebase.google.com/docs/firestore/query-data/listen
+    functions.logger.error('Error while listening to firebase counterRef', { error });
+  };
+  const unsubscribe = counterRepo.counterRef.onSnapshot(onSnapshot, onError);
+  req.on('close', () => unsubscribe());
 });
 router.post('/counter', async (req: Request, res: Response) => {
   const { performer, title, fileName, cue } = req.body;

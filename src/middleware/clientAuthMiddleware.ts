@@ -9,7 +9,7 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
     return;
   }
 
-  const token = extractToken(req.headers.authorization);
+  const token = extractTokenFromRequest(req);
   try {
     jwt.verify(token, TOKEN_SECRET);
     next();
@@ -21,4 +21,16 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
   }
 }
 
-const extractToken = (bearerToken: string | undefined): string => (bearerToken || '').substr(7);
+type ExtractTokenStrategyType = (req: Request) => string;
+const extractTokenStrategies: ExtractTokenStrategyType[] = [
+  (req: Request) => (req.headers.authorization || '').substr(7),
+  (req: Request) => (req.query.authorization as string) || '',
+];
+const extractTokenFromRequest = (req: Request): string => {
+  let token = '';
+  for (const strategy of extractTokenStrategies) {
+    token = strategy(req);
+    if (token) break;
+  }
+  return token;
+};
