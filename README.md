@@ -7,6 +7,10 @@ open http://localhost:5001/cuegenerator/us-central1/api
 
 # How to build and deploy
 
+Automatic deployments use GitHub Actions and are triggered on push to the `main` branch if commit contains "(release):" string. To make a release run `npm run release` and push a freshly produced commit (by `standard-version`) with relevant annotated tags `git push --follow-tags`
+
+A manual deployment can be run 
+
 ```bash
 npm run deploy
 open https://us-central1-cuegenerator.cloudfunctions.net/api
