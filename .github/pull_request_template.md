@@ -1,4 +1,4 @@
-fix|feat|docs|test: subject
+fix|feat|docs|test|build|refactor: subject
 
 [optional body]
 
