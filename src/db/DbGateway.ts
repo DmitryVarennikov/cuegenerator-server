@@ -12,7 +12,8 @@ const mount = <T>(collectionPath: string) =>
   firebase.firestore().collection(collectionPath).withConverter(converter<T>());
 
 // guard production db collection names
-const formatName = (name: string): string => (process.env.NODE_ENV === 'development' ? name + '_dev' : name);
+const formatName = (name: string): string =>
+  process.env.NODE_ENV === 'production' ? name : `${name}_${process.env.NODE_ENV}`;
 
 const db = {
   counter: mount<Counter>(formatName('counter')),
