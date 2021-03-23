@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "version": "1.0.1",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
@@ -8,7 +9,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "npm run lint && npm run build"
+    "test": "npm run lint && npm run build",
+    "release": "standard-version"
   },
   "engines": {
     "node": "12"
@@ -33,6 +35,7 @@
     "firebase-functions-test": "^0.2.0",
     "husky": "^4.3.8",
     "prettier": "^2.2.1",
+    "standard-version": "^9.1.1",
     "typescript": "^3.8.0"
   },
   "private": true,
