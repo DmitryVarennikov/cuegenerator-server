@@ -7,9 +7,9 @@ open http://localhost:5001/cuegenerator/us-central1/api
 
 # How to build and deploy
 
-Automatic deployments use GitHub Actions and are triggered on push to the `main` branch if commit contains "(release):" string. To make a release run `npm run release` and push a freshly produced commit (by `standard-version`) with relevant annotated tags `git push --follow-tags`
+Automatic deployments use GitHub Actions and are triggered on push to the `main` branch if commit contains "(release):" string. To make a release run `npm run release`. That's it! `standard-version` will run the `postrelease` script in the `package.json` which will take care about the rest.
 
-A manual deployment can be run 
+A manual deployment can be run
 
 ```bash
 npm run deploy
@@ -64,8 +64,8 @@ Content-Type: application/json
 Authorization: Bearer <token>
 
 {
-	"performer": "<string>", 
-	"title": "<string>", 
+	"performer": "<string>",
+	"title": "<string>",
 	"fileName": "<string>",
 	"cue": "<string>"
 }
