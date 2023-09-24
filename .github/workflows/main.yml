@@ -6,10 +6,9 @@ name: Deploy to Firebase Functions on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '(release):')"
     steps:
       - uses: actions/checkout@v2
-      - run: npm i
+      - run: npm ci
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:

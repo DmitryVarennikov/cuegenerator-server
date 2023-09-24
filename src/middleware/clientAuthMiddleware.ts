@@ -1,6 +1,6 @@
-import * as functions from 'firebase-functions';
+import { logger } from 'firebase-functions';
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config';
 
 export default function clientAuthMiddleware(req: Request, res: Response, next: NextFunction) {
@@ -11,14 +11,14 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
 
   const token = extractToken(req.headers.authorization);
   try {
-    jwt.verify(token, TOKEN_SECRET);
+    verify(token, TOKEN_SECRET);
     next();
-  } catch (e) {
-    if (e.name !== 'TokenExpiredError') {
-      functions.logger.warn('Error while verifying jwt', { token, e });
+  } catch (e: unknown) {
+    if (e instanceof Error && e.name !== 'TokenExpiredError') {
+      logger.warn('Error while verifying jwt', { token, e });
     }
-    res.status(401).json({ error: e.message });
+    res.status(401).json({ error: (e as Error).message });
   }
 }
 
-const extractToken = (bearerToken: string | undefined): string => (bearerToken || '').substr(7);
+const extractToken = (bearerToken: string | undefined): string => (bearerToken || '').substring(7);

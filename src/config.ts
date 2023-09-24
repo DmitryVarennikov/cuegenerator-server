@@ -5,5 +5,7 @@ export const allowedOrigins = [
   'http://localhost:3000',
   'https://cuegenerator.firebaseapp.com',
   'https://cuegenerator.web.app',
+  'https://cuegenerator-v3.firebaseapp.com',
+  'https://cuegenerator-v3.web.app',
   'https://cuegenerator.net',
 ];
