@@ -22,4 +22,4 @@ app.use('/', router);
 
 app.use(errorMiddleware);
 
-export const api = runWith({ secrets: [API_SECRET] }).https.onRequest(app);
+export const api = runWith({ secrets: [API_SECRET.name] }).https.onRequest(app);
