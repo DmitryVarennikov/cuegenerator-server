@@ -1,7 +1,7 @@
-import * as firebase from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 import db from './DbGateway';
 
-const FieldValue = firebase.firestore.FieldValue;
+const FieldValue = firestore.FieldValue;
 
 export default class SavedCuesRepo {
   addCue(performer: string, title: string, fileName: string, cue: string) {
@@ -10,7 +10,7 @@ export default class SavedCuesRepo {
       title,
       fileName,
       cue,
-      createdAt: FieldValue.serverTimestamp() as firebase.firestore.Timestamp,
+      createdAt: FieldValue.serverTimestamp() as firestore.Timestamp,
     });
   }
 }

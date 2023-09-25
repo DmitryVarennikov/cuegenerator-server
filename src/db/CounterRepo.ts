@@ -1,7 +1,7 @@
-import * as firebase from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 import db from './DbGateway';
 
-const FieldValue = firebase.firestore.FieldValue;
+const FieldValue = firestore.FieldValue;
 
 export default class CounterRepo {
   static readonly DOC_ID = 'counter-id';
