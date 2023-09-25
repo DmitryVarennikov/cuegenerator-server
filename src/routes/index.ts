@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import express, { Router, Express, Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import { counterRepo, savedCuesRepo } from '../db';
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config';
