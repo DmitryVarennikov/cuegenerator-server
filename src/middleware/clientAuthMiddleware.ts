@@ -1,7 +1,7 @@
 import { logger } from 'firebase-functions';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import { TOKEN_SECRET } from '../config';
+import { API_SECRET } from '../config';
 
 export default function clientAuthMiddleware(req: Request, res: Response, next: NextFunction) {
   if ('options' === req.method.toLocaleLowerCase()) {
@@ -11,7 +11,7 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
 
   const token = extractToken(req.headers.authorization);
   try {
-    verify(token, TOKEN_SECRET);
+    verify(token, API_SECRET);
     next();
   } catch (e: unknown) {
     if (e instanceof Error && e.name !== 'TokenExpiredError') {

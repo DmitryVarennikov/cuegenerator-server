@@ -1,6 +1,7 @@
-import * as functions from 'firebase-functions';
+import { defineSecret } from 'firebase-functions/params';
 
-export const TOKEN_SECRET = functions.config().token.secret;
+export const API_SECRET = defineSecret('API_SECRET').value();
+
 export const allowedOrigins = [
   'http://localhost:3000',
   'https://cuegenerator.firebaseapp.com',
