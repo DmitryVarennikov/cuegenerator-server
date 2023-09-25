@@ -7,7 +7,7 @@ import { API_SECRET } from '../config';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response) => {
-  const token = jwt.sign({}, API_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({}, API_SECRET.value(), { expiresIn: '1h' });
   res.json({ token });
 });
 router.get('/counter', async (req: Request, res: Response) => {

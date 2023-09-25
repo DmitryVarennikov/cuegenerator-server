@@ -11,7 +11,7 @@ export default function clientAuthMiddleware(req: Request, res: Response, next: 
 
   const token = extractToken(req.headers.authorization);
   try {
-    verify(token, API_SECRET);
+    verify(token, API_SECRET.value());
     next();
   } catch (e: unknown) {
     if (e instanceof Error && e.name !== 'TokenExpiredError') {
