@@ -1,6 +1,6 @@
 import { defineSecret } from 'firebase-functions/params';
 
-export const API_SECRET = defineSecret('API_SECRET');
+export const API_SECRET = defineSecret('projects/747548828434/secrets/API_SECRET');
 
 export const allowedOrigins = [
   'http://localhost:3000',
