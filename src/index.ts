@@ -1,5 +1,6 @@
 process.env.NODE_ENV = process.env.FUNCTIONS_EMULATOR ? 'development' : 'production';
 
+import 'source-map-support/register';
 import * as functions from 'firebase-functions';
 import express from 'express';
 import 'express-async-errors';
